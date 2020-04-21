@@ -39,7 +39,9 @@ class GmmMml(TransformerMixin):
         v = 2. * np.sqrt(2.) * np.sqrt(v)
 
         ell = mpl.patches.Ellipse(estmu, v[0], v[1],
-                                  180 + angle,facecolor='none')
+                                  180 + angle,
+                                  facecolor='none',
+                                  edgecolor='black')
         ell.set_clip_box(ax.bbox)
         ell.set_alpha(1)
         ax.add_artist(ell)
