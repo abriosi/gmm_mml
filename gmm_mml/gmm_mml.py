@@ -100,12 +100,8 @@ class GmmMml(TransformerMixin):
         else:
             globcov = np.array([np.array([np.cov(y,rowvar=False)])])
 
-        print("globcov", globcov)
-        print("kmax", (self.kmax,))
-        print("estcov", globcov.shape+(self.kmax,))
         estcov=np.empty(globcov.shape+(self.kmax,))
         for i in range(k):
-            print(estcov.shape)
             estcov[:,:,i]=np.diag((np.diag(np.ones((dimens,dimens))*np.max(np.diag(globcov/10)))))
 
         if self.check_plot== True:
