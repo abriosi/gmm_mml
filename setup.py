@@ -10,6 +10,6 @@ setup(name='gmm-mml',
       install_requires=[
           'numpy',
           'scipy',
-          'sklearn',
+          'scikit-learn',
       ],
       zip_safe=False)
