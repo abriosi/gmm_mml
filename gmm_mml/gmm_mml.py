@@ -74,7 +74,7 @@ class GmmMml(TransformerMixin):
         dimens=y.shape[1]
 
         if self.covoption==0:
-            npars = (dimens + dimens*(dimens+1)/2);
+            npars = (dimens + dimens*(dimens+1)/2)
         elif self.covoption==1:
             npars = 2*dimens
         elif self.covoption==2:
@@ -186,10 +186,11 @@ class GmmMml(TransformerMixin):
                         k=k-1
 
                     if killed==0:
+                        min_eig = np.min(np.real(np.linalg.eigvals(estcov[:, :, comp])))
+                        
+                        if min_eig < self.regularize:  # Adjust to use regularize parameter
+                            estcov[:, :, comp] += (self.regularize - min_eig) * np.eye(*estcov[:, :, comp].shape)
 
-                        min_eig = np.min(np.real(np.linalg.eigvals(estcov[:,:,comp])))
-                        if min_eig < 0:
-                            estcov[:,:,comp] -= 10*min_eig * np.eye(*estcov[:,:,comp].shape)
 
                         semi_indic[comp,:]=self._posterior_probability(y,estmu,estcov,comp)
                         comp+=1
